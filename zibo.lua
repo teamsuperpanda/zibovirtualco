@@ -222,7 +222,7 @@ end
 
 -- AFTER LANDING
 function AFTER_LANDING()
-  if (afterlanding == false and TAIL == tailcoded and AUTOBRAKE_DISARM_LIGHT == 1 and GS < 20 and REVERSE == 0) then 
+  if (afterlanding == false and TAIL == tailcoded and ONGROUND == 1 and GS < 20 and REVERSE == 0) then 
     afterlanding = true
 
     SPEEDBRAKE_LEVER = 0
