@@ -93,6 +93,8 @@ end
 function AFTER_START()
   if (beforetaxi == false and TAIL == tailcoded and ENG1_N1 > 18 and ENG2_N1 > 18 and AUTOBRAKE_ARM == 1 and ENG_STARTER1 == 1 and ENG_STARTER2 == 1) then 
     beforetaxi = true
+    message_content = "After Start"
+    message_count = 1
 
     -- Electrical
     command_once("laminar/B738/toggle_switch/gen1_dn")
@@ -134,6 +136,9 @@ end
 function TAXI()
   if (taxi == false and beforetaxi == true and TAIL == tailcoded and AUTOBRAKE_ARM == 1 and PARK_BRAKE == 0 and ENG1_N1 > 18 and ENG2_N1 > 18 and TUG == 0) then 
     taxi = true
+    message_content = "Taxi"
+    message_count = 1
+
     -- Blank Lower DU
     command_once("laminar/B738/LDU_control/push_button/MFD_ENG")
     command_once("laminar/B738/LDU_control/push_button/MFD_ENG")
@@ -151,7 +156,7 @@ end
 function TAKEOFF()
   if (takeoff == false and TAIL == tailcoded and TOGA == 1) then 
     takeoff = true
-    message_content = "Lights On"
+    message_content = "Take Off"
     message_count = 1
 
     command_once("laminar/B738/spring_switch/landing_lights_all")
@@ -164,8 +169,11 @@ end
 function LIFTOFF()
   if (liftoff == false and TAIL == tailcoded and RADALT > 80 and ONGROUND == 0) then
     liftoff = true
+    message_content = "Lift Off"
+    message_count = 1
 
     GEAR = 0
+    WAI = 0
   end
 end
 
@@ -173,6 +181,8 @@ end
 function AFTERTAKEOFF()
   if (aftertakeoff == false and TAIL == tailcoded and RADALT > 1000 and ONGROUND == 0 and SLATS == 0 and FLAP_LEVER == 0 and FLAPS == 0 and GEAR == 0 and IAS > UP_SPEED) then 
     aftertakeoff = true
+    message_content = "After Take Off"
+    message_count = 1
 
     command_once("laminar/B738/knob/autobrake_off")
     GEAR = 0.5
@@ -183,6 +193,8 @@ end
 -- LIGHTS ABOVE AND BELOW 10,000
 function ABOVETENTHOUSAND()
   if (TAIL == tailcoded and ONGROUND == 0 and ALT >10000) then 
+    message_content = "10,000'"
+    message_count = 1
     -- LOGO
     command_once("laminar/B738/switch/logo_light_off")
     -- LANDING
@@ -200,7 +212,9 @@ function ABOVETENTHOUSAND()
 end
 
 function BELOWTENTHOUSAND()
-  if (TAIL == tailcoded and ONGROUND == 0 and ALT <10000) then 
+  if (TAIL == tailcoded and ONGROUND == 0 and ALT <10000) then     
+    message_content = "10,000'"
+    message_count = 1
     -- LOGO
     if (SUNDEG < 0) then
     command_once("laminar/B738/switch/logo_light_on") else
@@ -223,7 +237,9 @@ end
 -- AFTER LANDING
 function AFTER_LANDING()
   if (afterlanding == false and TAIL == tailcoded and ONGROUND == 1 and GS < 20 and REVERSE == 0) then 
-    afterlanding = true
+    afterlanding = true    
+    message_content = "Landing"
+    message_count = 1
 
     SPEEDBRAKE_LEVER = 0
     PROBE1 = 0
@@ -264,6 +280,8 @@ end
 function AT_GATE()
   if (arriveatgate == false and TAIL == tailcoded and START_LEVER1 == 1 and START_LEVER2 == 0 and GS < 0.5 and PARK_BRAKE == 1 and APU_GEN == 1) then 
     arriveatgate = true
+    message_content = "Arrive at Gate"
+    message_count = 1
 
     command_once("laminar/B738/toggle_switch/apu_gen2_dn")
     command_once("laminar/B738/toggle_switch/apu_gen1_dn")
@@ -273,6 +291,8 @@ end
 function SHUT_DWN()
   if (arriveatgate == true and shutdown == false and TAIL == tailcoded and START_LEVER1 ==0 and START_LEVER2 == 0 and APU_GEN == 0) then
     shutdown = true
+    message_content = "Shutdown"
+    message_count = 1
 
     command_once("laminar/B738/toggle_switch/fuel_pump_lft1")
     command_once("laminar/B738/toggle_switch/fuel_pump_rgt1")
@@ -300,6 +320,8 @@ end
 function BEACON_OFF()
   if (arriveatgate == true and TAIL == tailcoded and shutdown == true and beaconoff == false and ENG1_N2 < 15 and ENG2_N2 < 15) then
     beaconoff = true
+    message_content = "Beacon"
+    message_count = 1
 
     BEACON = 0
   end
