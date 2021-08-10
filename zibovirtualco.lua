@@ -320,6 +320,10 @@ function SHUT_DWN()
 
     PROBE1 = 0
     PROBE2 = 0
+    EAI1 = 0
+    EAI2 = 0
+    WAI = 0
+    
     APU_BLEED = 1
     ISOLATIONVALVE = 2
     command_once("laminar/B738/autopilot/flight_director_toggle")
