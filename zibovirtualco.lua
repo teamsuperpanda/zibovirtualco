@@ -1,7 +1,9 @@
--- ZIBO VIRTUAL CO
+-- *** ZIBO VIRTUAL CO ***
 -- Team Super Panda
 -- Written AUG, 2021
 -- https://github.com/teamsuperpanda/zibovirtualco
+
+-- Version 1.0
 
 -- Variables
 message_count = 101
