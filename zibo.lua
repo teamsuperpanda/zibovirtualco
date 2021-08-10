@@ -203,7 +203,7 @@ end
 -- LIGHTS ABOVE AND BELOW 10,000
 function ABOVETENTHOUSAND()
   if (TAIL == tailcoded and ONGROUND == 0 and ALT >10000) then 
-    message_content = "10,000'"
+    message_content = "Above 10,000'"
     message_count = 1
     -- LOGO
     command_once("laminar/B738/switch/logo_light_off")
@@ -222,8 +222,9 @@ function ABOVETENTHOUSAND()
 end
 
 function BELOWTENTHOUSAND()
-  if (TAIL == tailcoded and ONGROUND == 0 and ALT <10000) then     
-    message_content = "10,000'"
+  if (TAIL == tailcoded and ONGROUND == 0 and ALT <10000 and aftertakeoff == true) then 
+      
+    message_content = "Below 10,000'"
     message_count = 1
     -- LOGO
     if (SUNDEG < 0) then
