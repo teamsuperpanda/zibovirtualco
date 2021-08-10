@@ -88,7 +88,7 @@ dataref("SUNDEG", "sim/graphics/scenery/sun_pitch_degrees", "readable")
 -- Scripts
 -- MESSAGE
 function MESSAGE()
-	if (message_count <= 100) then
+	if (message_count <= 500) then
 	local pos = 0
 	pos = big_bubble(20, pos, message_content)
 	message_count = message_count + 1
