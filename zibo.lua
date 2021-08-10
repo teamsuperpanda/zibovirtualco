@@ -53,8 +53,9 @@ dataref("ENG_STARTER2", "laminar/B738/engine/starter2_pos", "readable")
 dataref("AUTOTHROTTLE", "laminar/B738/autopilot/autothrottle_arm_pos", "readable")
 dataref("START_LEVER1", "laminar/B738/engine/mixture_ratio1", "readable")
 dataref("START_LEVER2", "laminar/B738/engine/mixture_ratio2", "readable")
--- EFIS
+-- EFIS / LOWER DU
 dataref("WX_RADAR", "sim/cockpit/switches/EFIS_shows_weather", "readable")
+dataref("LOWERDU_PAGE", "laminar/B738/systems/lowerDU_page", "readable") -- 0 off, 1 eng on lower, 2 compact 
 -- FLAPS
 dataref("SLATS", "laminar/B738/annunciator/slats_transit", "readable") -- 1 means moving
 dataref("FLAP_LEVER", "laminar/B738/flt_ctrls/flap_lever", "writeable") -- 0 means lever @ UP
@@ -145,8 +146,12 @@ function TAXI()
     message_count = 1
 
     -- Blank Lower DU
+    if (LOWERDU_PAGE == 1) then
     command_once("laminar/B738/LDU_control/push_button/MFD_ENG")
     command_once("laminar/B738/LDU_control/push_button/MFD_ENG")
+    elseif (LOWERDU_PAGE == 2) then
+    command_once("laminar/B738/LDU_control/push_button/MFD_ENG")
+    end
 
     -- Lights
     command_once("laminar/B738/toggle_switch/taxi_light_brightness_on")
@@ -241,7 +246,7 @@ end
 
 -- AFTER LANDING
 function AFTER_LANDING()
-  if (afterlanding == false and TAIL == tailcoded and ONGROUND == 1 and GS < 20 and REVERSE == 0) then 
+  if (afterlanding == false and TAIL == tailcoded and ONGROUND == 1 and GS < 20 and REVERSE == 0 and PARK_BRAKE == 0) then 
     afterlanding = true    
     message_content = "Landing"
     message_count = 1
