@@ -246,7 +246,7 @@ end
 
 -- AFTER LANDING
 function AFTER_LANDING()
-  if (afterlanding == false and TAIL == tailcoded and ONGROUND == 1 and GS < 20 and REVERSE == 0 and aftertakeoff = true) then 
+  if (afterlanding == false and TAIL == tailcoded and ONGROUND == 1 and GS < 20 and REVERSE == 0 and aftertakeoff == true) then 
     afterlanding = true    
     message_content = "Landing"
     message_count = 1
