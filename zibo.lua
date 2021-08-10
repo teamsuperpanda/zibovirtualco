@@ -53,8 +53,9 @@ dataref("ENG_STARTER2", "laminar/B738/engine/starter2_pos", "readable")
 dataref("AUTOTHROTTLE", "laminar/B738/autopilot/autothrottle_arm_pos", "readable")
 dataref("START_LEVER1", "laminar/B738/engine/mixture_ratio1", "readable")
 dataref("START_LEVER2", "laminar/B738/engine/mixture_ratio2", "readable")
--- EFIS
+-- EFIS / LOWER DU
 dataref("WX_RADAR", "sim/cockpit/switches/EFIS_shows_weather", "readable")
+dataref("LOWERDU_PAGE", "laminar/B738/systems/lowerDU_page", "readable") -- 0 off, 1 eng on lower, 2 compact 
 -- FLAPS
 dataref("SLATS", "laminar/B738/annunciator/slats_transit", "readable") -- 1 means moving
 dataref("FLAP_LEVER", "laminar/B738/flt_ctrls/flap_lever", "writeable") -- 0 means lever @ UP
@@ -87,7 +88,7 @@ dataref("SUNDEG", "sim/graphics/scenery/sun_pitch_degrees", "readable")
 -- Scripts
 -- MESSAGE
 function MESSAGE()
-	if (message_count <= 100) then
+	if (message_count <= 500) then
 	local pos = 0
 	pos = big_bubble(20, pos, message_content)
 	message_count = message_count + 1
@@ -145,8 +146,12 @@ function TAXI()
     message_count = 1
 
     -- Blank Lower DU
+    if (LOWERDU_PAGE == 1) then
     command_once("laminar/B738/LDU_control/push_button/MFD_ENG")
     command_once("laminar/B738/LDU_control/push_button/MFD_ENG")
+    elseif (LOWERDU_PAGE == 2) then
+    command_once("laminar/B738/LDU_control/push_button/MFD_ENG")
+    end
 
     -- Lights
     command_once("laminar/B738/toggle_switch/taxi_light_brightness_on")
@@ -198,7 +203,7 @@ end
 -- LIGHTS ABOVE AND BELOW 10,000
 function ABOVETENTHOUSAND()
   if (TAIL == tailcoded and ONGROUND == 0 and ALT >10000) then 
-    message_content = "10,000'"
+    message_content = "Above 10,000'"
     message_count = 1
     -- LOGO
     command_once("laminar/B738/switch/logo_light_off")
@@ -217,8 +222,9 @@ function ABOVETENTHOUSAND()
 end
 
 function BELOWTENTHOUSAND()
-  if (TAIL == tailcoded and ONGROUND == 0 and ALT <10000) then     
-    message_content = "10,000'"
+  if (TAIL == tailcoded and ONGROUND == 0 and ALT <10000 and aftertakeoff == true) then 
+      
+    message_content = "Below 10,000'"
     message_count = 1
     -- LOGO
     if (SUNDEG < 0) then
@@ -241,7 +247,7 @@ end
 
 -- AFTER LANDING
 function AFTER_LANDING()
-  if (afterlanding == false and TAIL == tailcoded and ONGROUND == 1 and GS < 20 and REVERSE == 0) then 
+  if (afterlanding == false and TAIL == tailcoded and ONGROUND == 1 and GS < 20 and REVERSE == 0 and aftertakeoff == true) then 
     afterlanding = true    
     message_content = "Landing"
     message_count = 1
