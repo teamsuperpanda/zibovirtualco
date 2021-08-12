@@ -16,7 +16,7 @@ Go to the X-Plane installation folder and copy the ``zibovirtualco.lua`` script 
 
 ## How it works
 
-Configure the aircraft for each phase of flight as documented below to ensure the correct copilot actions are triggered. Each procedure must be completed for the subsequent procedure to trigger. 
+Configure the aircraft for each phase of flight as documented below to ensure the correct copilot actions are triggered. Each procedure must be completed for the subsequent procedure to trigger. A small bubble message on the bottom left lets you know the virtual copilot has actioned a checklist.
 
 ### After Start
 
