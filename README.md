@@ -7,7 +7,7 @@ The actions carried out by the virtual copilot are based on Boeing's FCOM, modif
 
 ## Installation
 
-Go to the X-Plane installation folder and copy the ``zibo.lua`` script file into the `/Resources/plugins/FlyWithLua/Scripts` folder. 
+Go to the X-Plane installation folder and copy the ``zibovirtualco.lua`` script file into the `/Resources/plugins/FlyWithLua/Scripts` folder. 
 
 ### Required Plugins
 
@@ -16,7 +16,7 @@ Go to the X-Plane installation folder and copy the ``zibo.lua`` script file into
 
 ## How it works
 
-Configure the aircraft for each phase of flight as documented below to ensure the correct copilot actions are triggered. Each procedure must be completed for the subsequent procedure to trigger. 
+Configure the aircraft for each phase of flight as documented below to ensure the correct copilot actions are triggered. Each procedure must be completed for the subsequent procedure to trigger. A small bubble message on the bottom left lets you know the virtual copilot has actioned a checklist.
 
 ### After Start
 
@@ -24,12 +24,12 @@ Configure the aircraft for each phase of flight as documented below to ensure th
 
 |System|Action|Notes|
 |:-------|:-----|:------|
-|Generators |ON||
-|Pitot Heat | ON||
-|Anti Ice |ON | 10 degrees or below & raining|
-|Packs|AUTO||
-|Isolation Valve| AUTO||
-|Bleeds|ENG bleeds ON and APU bleed OFF|For a bleeds off take off, configure after copilot actions|
+|GENERATOR 1 and 2 |ON||
+|PROBE HEAT| ON||
+|WING and ENGINE ANTI-ICE |ON | 10 degrees or below & raining|
+|PACKS |AUTO||
+|ISOLATION VALVE| AUTO||
+|Bleeds|ENG bleeds ON and APU bleed OFF|For a bleeds off take off, reconfigure after copilot actions|
 |APU|OFF||
 |Flaps |Set to FMC Takeoff Flap||
 
@@ -39,8 +39,8 @@ Configure the aircraft for each phase of flight as documented below to ensure th
 
 |System|Action|Notes|
 |:-------|:-----|:------|
-|Lights|ON|Taxi, Runway Turn Off, and Wing|
-|Lower DU|Blanked| Assumes Engine display was on lower DU for start|
+|Lights|ON|TAXI, RUNWAY TURNOFF, and WING|
+|Lower DU|Blanked| |
 
 ### Before takeoff
 
@@ -49,7 +49,7 @@ Configure the aircraft for each phase of flight as documented below to ensure th
 
 |System|Action|Notes|
 |:-------|:-----|:------|
-|Lights|ON|LANDING and STROBES|
+|Lights|ON|LANDING and POSITION light STROBE & STEADY|
 
 Note: This is not technically accurate as the strobes should be on when you enter the runway, however it's not possible to script this.
 
@@ -58,8 +58,8 @@ Note: This is not technically accurate as the strobes should be on when you ente
 **Configuration**: Above 80' Radio Altimeter
 |System|Action|Notes|
 |:-------|:-----|:------|
-|Gear|UP||
-
+|Landing gear lever|UP||
+|WING ANTI-ICE|OFF|Zibo doesn't accurately model this as it should turn off automatically at lift off| 
 
 ### After takeoff
 
@@ -67,9 +67,9 @@ Note: This is not technically accurate as the strobes should be on when you ente
 
 |System|Action|Notes|
 |:-------|:-----|:------|
-|Gear|OFF||
-|Autobrake|OFF||
-|WING ANTI-ICE|OFF|Zibo doesn't accurately model this as it should turn off automatically at lift off| 
+|Landing gear lever|OFF||
+|AUTO BRAKE|OFF||
+
 
 ### Through 10,000'
 
@@ -77,8 +77,8 @@ Note: This is not technically accurate as the strobes should be on when you ente
 
 |System|Action|Notes|
 |:-------|:-----|:------|
-|Lights| Set for cruise|All lights off, except beacon and strobes |
-|Lights| Set for landing|All lights on, except logo light by day|
+|Lights| Set for cruise|All lights off, except ANTI COLLISION and POSITION light STROBE & STEADY |
+|Lights| Set for landing|All lights on, except LOGO light by day|
 
 ### After Landing
 
@@ -86,23 +86,23 @@ Note: This is not technically accurate as the strobes should be on when you ente
 
 |System|Action|Notes|
 |:-------|:-----|:------|
-|SPEEDBRAKE|Stowed||
-|PROBE HEAT|OFF||
-|AUTOBRAKE|OFF||
-|ANTI ICE|OFF| If Engine Anti Ice is not required
-|WEATHER RADAR| OFF| Both Capt and FO ND|
+|SPEED BRAKE|DOWN||
+|PROBE HEAT|AUTO|In some aircraft configurations, this may be OFF instead of AUTO|
+|AUTO BRAKE|OFF||
+|ANTI ICE|OFF| If Engine Anti Ice is not required|
+|Weather radar| OFF| Both Capt and FO ND|
 |APU|Start||
-|FLAP|UP||
-|Lights| Landing OFF, Navs to Steady||
-|TIMER|Start| Starts Captain's timer for 3 minute cool down|
+|FLAPS|UP||
+|Lights| LANDING lights OFF, POSITION light STEADY||
+|Timer|Start| Starts the Captain's timer for 3 minute cool down|
 
 ### Arrive at gate
 
-**Configuration**:APU Running and Engine start lever 2 CUTOFF
+**Configuration**: APU Running and Engine start lever 2 CUTOFF
 
 |System|Action|Notes|
 |:-------|:-----|:------|
-|APU GEN| ON BUS||
+|APU GEN| ON bus||
 
 Note: Once the APU GEN is on the bus, shut down engine 1
 
@@ -112,13 +112,13 @@ Note: Once the APU GEN is on the bus, shut down engine 1
 
 |System|Action|Notes|
 |:-------|:-----|:------|
-|Fuel Pumps|CONFIGURED|Left Main FWD fuel pump remains on for the APU|
-|Seat Belt Sign|OFF||
-|HYD ELEC PUMPS|OFF||
+|FUEL PUMPS|Configured|Left FWD fuel pump remains on for the APU|
+|FASTEN BELTS|OFF||
+|ELECTRIC HYDRAULIC PUMPS|OFF||
 |ISOLATION VALVE|OPEN||
 |APU BLEED|ON||
 |FLIGHT DIRECTORS|OFF|
-|BEACON|OFF| Once N2 is below 15%|
+|ANTI COLLISION light|OFF| Once N2 is below 15%|
 
 
 ## Development
