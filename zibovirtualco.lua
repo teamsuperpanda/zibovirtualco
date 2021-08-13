@@ -3,7 +3,7 @@
 -- Written AUG, 2021
 -- https://github.com/teamsuperpanda/zibovirtualco
 
--- Version 1.0
+-- Version 1.1
 
 -- Variables
 message_count = 101
@@ -15,6 +15,8 @@ taxi = false
 takeoff = false
 liftoff = false
 aftertakeoff = false
+lightsaboveten = false
+lightsbelowten = false
 afterlanding = false
 arriveatgate = false
 shutdown = false
@@ -201,10 +203,12 @@ function AFTERTAKEOFF()
   end
 end
 
-
+lightsaboveten = false
+lightsbelowten = false
 -- LIGHTS ABOVE AND BELOW 10,000
 function ABOVETENTHOUSAND()
-  if (TAIL == tailcoded and ONGROUND == 0 and ALT >10000) then 
+  if (TAIL == tailcoded and ONGROUND == 0 and ALT >10000 and lightsaboveten == false and lightsbelowten == false) then 
+    lightsaboveten = true
     message_content = "Above 10,000'"
     message_count = 1
     -- LOGO
@@ -224,8 +228,8 @@ function ABOVETENTHOUSAND()
 end
 
 function BELOWTENTHOUSAND()
-  if (TAIL == tailcoded and ONGROUND == 0 and ALT <10000 and aftertakeoff == true) then 
-      
+  if (TAIL == tailcoded and ONGROUND == 0 and ALT <10000 and aftertakeoff == true and lightsaboveten == false and lightsbelowten == false) then 
+    lightsbelowten = true 
     message_content = "Below 10,000'"
     message_count = 1
     -- LOGO
