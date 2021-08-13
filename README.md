@@ -9,6 +9,10 @@ The actions carried out by the virtual copilot are based on Boeing's FCOM, modif
 
 Go to the X-Plane installation folder and copy the ``zibovirtualco.lua`` script file into the `/Resources/plugins/FlyWithLua/Scripts` folder. 
 
+## Update
+
+To update to a newer version simply download the latest release and replace the ``zibovirtualco.lua`` script file into the `/Resources/plugins/FlyWithLua/Scripts` folder. 
+
 ### Required Plugins
 
 [FlyWithLua NG](https://forums.x-plane.org/index.php?/files/file/38445-flywithlua-ng-next-generation-edition-for-x-plane-11-win-lin-mac/)
