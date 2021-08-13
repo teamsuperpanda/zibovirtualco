@@ -228,7 +228,7 @@ function ABOVETENTHOUSAND()
 end
 
 function BELOWTENTHOUSAND()
-  if (TAIL == tailcoded and ONGROUND == 0 and ALT <10000 and aftertakeoff == true and lightsaboveten == false and lightsbelowten == false) then 
+  if (TAIL == tailcoded and ONGROUND == 0 and ALT <10000 and aftertakeoff == true and lightsaboveten == true and lightsbelowten == false) then 
     lightsbelowten = true 
     message_content = "Below 10,000'"
     message_count = 1
