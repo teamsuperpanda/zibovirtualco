@@ -3,11 +3,11 @@
 -- Written AUG, 2021
 -- https://github.com/teamsuperpanda/zibovirtualco
 
--- Version 1.1
+-- Version 1.2
 
 -- Variables
 message_count = 101
-message_content = ""
+message_content = "zibovirtualco Ready"
 tailcoded = "ZB738"
 
 beforetaxi = false
