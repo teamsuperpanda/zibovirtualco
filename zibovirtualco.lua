@@ -7,7 +7,7 @@
 
 -- Variables
 message_count = 101
-message_content = "zibovirtualco Ready"
+message_content = "zibovirtualco - Ready"
 tailcoded = "ZB738"
 
 beforetaxi = false
