@@ -21,6 +21,33 @@ To update to a newer version simply download the latest release and replace the 
 
 Configure the aircraft for each phase of flight as documented below to ensure the correct copilot actions are triggered. Each procedure must be completed for the subsequent procedure to trigger. A small bubble message on the bottom left lets you know the virtual copilot has actioned a checklist.
 
+### Pushback
+
+**Configuration**: Tug connected with chocks removed and park brake released
+
+| System          | Action | Notes |
+| :-------------- | :----- | :---- |
+| BEACON          | ON     |       |
+| PACKS           | OFF    |       |
+| ISOLATION VALVE | OPEN   |       |
+| APU             | OFF    |       |
+
+### Engine 2 Start
+
+**Configuration**: Pushback in progress
+
+| System       | Action | Notes |
+| :----------- | :----- | :---- |
+| ENG2 STARTER | GND    |       |
+
+### Engine 1 Start
+
+**Configuration**: Pushback in progress and Engine 2 started
+
+| System       | Action | Notes |
+| :----------- | :----- | :---- |
+| ENG1 STARTER | GND    |       |
+
 ### After Start
 
 **Configuration**: Engines running with Autobrake set to RTO

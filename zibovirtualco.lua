@@ -3,13 +3,16 @@
 -- Written AUG, 2021
 -- https://github.com/teamsuperpanda/zibovirtualco
 
--- Version 1.2
+-- Version 1.3
 
 -- Variables
 message_count = 101
-message_content = "zibovirtualco - Ready"
+message_content = "zibovirtualco v1.3 - Ready"
 tailcoded = "ZB738"
 
+pushback = false
+start1 = false
+start2 = false
 beforetaxi = false
 taxi = false
 takeoff = false
@@ -36,6 +39,7 @@ dataref("UP_SPEED", "laminar/B738/pfd/flaps_up", "readable")
 dataref("FO_FD", "laminar/B738/autopilot/flight_director_fo_pos", "readable")
 dataref("TOGA", "laminar/B738/autopilot/left_toga_pos", "readable")
 dataref("IAS", "sim/flightmodel/position/indicated_airspeed", "readable")
+dataref("CHOCKS", "laminar/B738/fms/chock_status", "readable")
 -- LIGHTS
 dataref("BEACON", "sim/cockpit/electrical/beacon_lights_on", "writeable")
 dataref("TURNOFF_LEFT", "laminar/B738/toggle_switch/rwy_light_left", "writable")
@@ -97,6 +101,44 @@ function MESSAGE()
 	pos = big_bubble(20, pos, message_content)
 	message_count = message_count + 1
 	end
+end
+
+-- PUSH BACK
+function PUSH_BACK()
+  if (pushback == false and TUG == 1 and PARK_BRAKE == 0 and CHOCKS == 0) then
+    pushback = true
+    message_content = "Push Back"
+    message_count = 1
+
+    command_once("laminar/B738/toggle_switch/seatbelt_sign_dn")
+    command_once("laminar/B738/toggle_switch/seatbelt_sign_dn")
+
+    BEACON = 1
+    LPACK = 0
+    RPACK = 0
+    ISOLATIONVALVE = 2
+    APU_BLEED = 1
+  end
+end
+
+function START2()
+  if (pushback == true and start2 == false and ENG1_N1 < 18 and ENG2_N1 < 18 and ENG_STARTER1 == 1 and ENG_STARTER2 == 1 and GS > 1) then
+    start2 = true
+    message_content = "Starting 2..."
+    message_count = 1
+
+    command_once("laminar/B738/rotary/eng2_start_grd")
+  end
+end
+
+function START1()
+  if (start2 == true and start1 == false and ENG1_N2 < 18 and ENG2_N2 > 18 and ENG_STARTER1 == 1 and ENG_STARTER2 == 1) then
+    start1 = true
+    message_content = "Starting 1..."
+    message_count = 1
+
+    command_once("laminar/B738/rotary/eng1_start_grd")
+  end
 end
 
 -- AFTER START
@@ -351,6 +393,9 @@ end
 -- Run Scripts
 do_every_draw("MESSAGE()")
 
+do_often("PUSH_BACK()")
+do_often("START1()")
+do_often("START2()")
 do_often("AFTER_START()")
 do_often("TAXI()")
 
