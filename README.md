@@ -7,7 +7,15 @@ The actions carried out by the virtual copilot are based on Boeing's FCOM, modif
 
 ## Installation
 
-Go to the X-Plane installation folder and copy the `zibovirtualco.lua` script file into the `/Resources/plugins/FlyWithLua/Scripts` folder.
+Go to the X-Plane installation folder and copy the `zibovirtualco.lua` script file and the `zibovirtualco` folder into the `/Resources/plugins/FlyWithLua/Scripts` folder.
+
+## Options
+
+Open `zibovirtualco.lua` in your favourate text editor. You will see on line 15 there are some options you can change.
+If you don't want the text bubbles on the bottom left to appear simply change `OPTIONS_VIEWTEXTBUBBLES` to false.
+The co-pilot sounds can be disabled by changing `OPTIONS_PLAYSOUNDS` to false.
+
+There are also Stable Approach parameters you can amend also.
 
 ## Update
 
